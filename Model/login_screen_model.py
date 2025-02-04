@@ -5,12 +5,17 @@ class LoginScreenModel:
     def __init__(self, database):
         self.database = database
 
-    def select_all_users(self):
-        db = self.database
-        cur = db.cursor()
-        cur.execute("SELECT * from user;")
-        u = cur.fetchall()
-        print(u)
+    def select_user_data(self, userName, userPassword):
+        try:
+            db = self.database
+            cur = db.cursor()
+            cur.execute(
+                f"SELECT user_name,user_password from user where user_name='{userName}' AND user_password='{userPassword}';"
+            )
+            user_data = cur.fetchone()
+            return user_data
+        except Exception as e:
+            pass
 
         # self.creat_user_table()
 

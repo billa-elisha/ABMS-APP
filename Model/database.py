@@ -6,7 +6,7 @@ class DataBase:
         self.create_products_table()
         self.create_sales_table()
         self.create_user_table()
-        self.creatingDefautLogedInuser()
+        # self.creatingDefautLogedInuser()
 
     def get_database_connection(self):
         return sqlite3.connect("SDBase.db")
@@ -30,12 +30,12 @@ class DataBase:
         db = self.get_database_connection()
         cursor = db.cursor()
         quary = """CREATE TABLE IF NOT EXISTS products(
-                 product_id INTEGER PRIMARY KEY, 
+                 product_id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  product_bar_code text NOT NULL, 
                  product_name text NOT NULL, 
                  product_cost_price real NOT NULL,
                  product_selling_price real NOT NULL,
-                 product_quantity INTEGER NOT NULL
+                 product_quantity integer NOT NULL
                 );"""
         cursor.execute(quary)
         db.close()
@@ -66,82 +66,85 @@ class DataBase:
             db = self.get_database_connection()
             cursor = db.cursor()
 
-            q = "insert into user values(user_id,'elisha',12345,'admin',903993)"
+            q = """insert into products values('product_id','1234','sumsong',80.6,90.0,78.0);"""
             cursor.execute(q)
             db.commit()
             db.close()
-        except:
+        except Exception as e:
+            print(e)
             pass
 
-    # def logedInUsersTable(self):
-    #     """This function is use to create the users table
-    #     and it is called in the init method
-    #     """
-    #     mydb = sqlite3.connect(dbname)
-    #     mycursor = mydb.cursor()
-    #     quary1 = ('''CREATE TABLE IF NOT EXISTS UserLogedIn(
-    #              luser_id INTEGER PRIMARY KEY,
-    #              name text NOT NULL,
-    #              id text);''')
-    #     mycursor.execute(quary1)
-    #     mydb.close()
 
-    # def companyDetailsTable(self):
-    #     """This function is use to create the company details table
-    #     and it is called in the init method
+# DataBase()
+# def logedInUsersTable(self):
+#     """This function is use to create the users table
+#     and it is called in the init method
+#     """
+#     mydb = sqlite3.connect(dbname)
+#     mycursor = mydb.cursor()
+#     quary1 = ('''CREATE TABLE IF NOT EXISTS UserLogedIn(
+#              luser_id INTEGER PRIMARY KEY,
+#              name text NOT NULL,
+#              id text);''')
+#     mycursor.execute(quary1)
+#     mydb.close()
 
-    #     """
-    #     try:
-    #         mydb = sqlite3.connect(dbname)
-    #         mycursor = mydb.cursor()
-    #         quary = ('''CREATE TABLE IF NOT EXISTS company(
-    #                 company_id INTEGER PRIMARY KEY,
-    #                 company_name text,
-    #                 company_tell text,
-    #                 company_location text);''')
-    #         mycursor.execute(quary)
-    #         mydb.commit()
-    #         mydb.close()
+# def companyDetailsTable(self):
+#     """This function is use to create the company details table
+#     and it is called in the init method
 
-    #         mydb =self.mydb
-    #         cur = mydb.cursor()
-    #         iscompanyempty = 'select company_name from company'
-    #         cur.execute(iscompanyempty)
-    #         names=cur.fetchall()
-    #         try:
-    #             length=len([i for i in names[0]])
-    #         except:
-    #             self.creatingDefautCompanyDetails()
+#     """
+#     try:
+#         mydb = sqlite3.connect(dbname)
+#         mycursor = mydb.cursor()
+#         quary = ('''CREATE TABLE IF NOT EXISTS company(
+#                 company_id INTEGER PRIMARY KEY,
+#                 company_name text,
+#                 company_tell text,
+#                 company_location text);''')
+#         mycursor.execute(quary)
+#         mydb.commit()
+#         mydb.close()
 
-    #         mydb.close()
-    #         # if length <=0:
-    #         #     self.creatingDefautCompanyDetails()
-    #     except Exception as e:
-    #         pass
+#         mydb =self.mydb
+#         cur = mydb.cursor()
+#         iscompanyempty = 'select company_name from company'
+#         cur.execute(iscompanyempty)
+#         names=cur.fetchall()
+#         try:
+#             length=len([i for i in names[0]])
+#         except:
+#             self.creatingDefautCompanyDetails()
 
-    # def deletingFoldersDates(self):
-    #     """This function is use to create the date table
-    #     and it is called in the init method
-    #     """
-    #     try:
-    #         mydb = sqlite3.connect(dbname)
-    #         mycursor = mydb.cursor()
-    #         quary = ('''CREATE TABLE IF NOT EXISTS recordFilesDeletedDays(
-    #                 date_id INTEGER PRIMARY KEY,
-    #                 date TEXT NOT NULL
-    #                 );''')
-    #         mycursor.execute(quary)
-    #         mydb.close()
-    #     except:
-    #         pass
+#         mydb.close()
+#         # if length <=0:
+#         #     self.creatingDefautCompanyDetails()
+#     except Exception as e:
+#         pass
 
-    # def creatingDefautCompanyDetails(self):
-    #     try:
-    #         mydb = sqlite3.connect(dbname)
-    #         mycursor = mydb.cursor()
-    #         company = 'insert into company (company_name,company_tell,company_location) values("Enter Company Name","9999999","Enter Company Location")'
-    #         mycursor.execute(company)
-    #         mydb.commit()
-    #         mydb.close()
-    #     except:
-    #         pass
+# def deletingFoldersDates(self):
+#     """This function is use to create the date table
+#     and it is called in the init method
+#     """
+#     try:
+#         mydb = sqlite3.connect(dbname)
+#         mycursor = mydb.cursor()
+#         quary = ('''CREATE TABLE IF NOT EXISTS recordFilesDeletedDays(
+#                 date_id INTEGER PRIMARY KEY,
+#                 date TEXT NOT NULL
+#                 );''')
+#         mycursor.execute(quary)
+#         mydb.close()
+#     except:
+#         pass
+
+# def creatingDefautCompanyDetails(self):
+#     try:
+#         mydb = sqlite3.connect(dbname)
+#         mycursor = mydb.cursor()
+#         company = 'insert into company (company_name,company_tell,company_location) values("Enter Company Name","9999999","Enter Company Location")'
+#         mycursor.execute(company)
+#         mydb.commit()
+#         mydb.close()
+#     except:
+#         pass

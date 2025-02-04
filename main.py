@@ -5,12 +5,12 @@ import os
 import View.screens
 
 
-class MyApp(MDApp):
+class ABMSApp(MDApp):
     KV_DIRS = [os.path.join(os.getcwd(), "View")]
     DEBUG = 1
 
     def __init__(self, *args, **kwargs):
-        super(MyApp, self).__init__(*args, **kwargs)
+        super(ABMSApp, self).__init__(*args, **kwargs)
 
     def build_app(self):
         self.screen_manager = MDScreenManager()
@@ -24,9 +24,9 @@ class MyApp(MDApp):
             view.manager_screen = self.screen_manager
             view.name = screen_name
             self.screen_manager.add_widget(view)
-        # return MDScreenManager()
+        self.screen_manager.current = "operator screen"
         print(self.screen_manager.screens)
         return self.screen_manager
 
 
-MyApp().run()
+ABMSApp().run()
